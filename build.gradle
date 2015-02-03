@@ -1,0 +1,19 @@
+plugins {
+  id 'base'
+  id 'java'
+}
+
+def buildTask = tasks.matching { it.name.equals('build') }
+
+buildTask.all {
+  logger.warn "This should print immediately (${it})"
+}
+
+task customTask {
+  dependsOn buildTask
+  doLast {
+    logger.quiet "Hello World"
+  }
+}
+
+defaultTasks 'customTask'
